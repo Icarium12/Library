@@ -1,1 +1,35 @@
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
 
+.libraryContainer {
+    border: 1px solid black;
+    /* height: 30rem; */
+    width: 65rem;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    justify-items: center;
+}
+
+.bookcard {
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    /* text-align: center; */
+    border: 1px solid black;
+    height: 15rem;
+    width: 15rem;
+    
+}
+
+.book {
+    margin-top: 1rem;
+    border: 1px solid black;
+    height: 13rem;
+    width: 13rem;
+}
