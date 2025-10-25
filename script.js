@@ -54,6 +54,22 @@ function displayBook(array, libraryContainer) {
         const status = document.createElement('div');
         status.textContent = `Status: ${array[i].readStatus}`;
         bookCard.appendChild(status);
+
+        const deleteButton = document.createElement('button');
+        deleteButton.textContent = "Delete";
+        bookCard.appendChild(deleteButton);
+
+        bookCard.dataset.id = array[i].id;
+
+        deleteButton.addEventListener('click', () => {
+            if(bookCard.dataset.id === array[i].id) {
+                const ensure = prompt("Are you sure you want to delete book (Y/N)?")
+                if (ensure === 'y' || ensure === 'Y') {
+                    libraryContainer.removeChild(bookCard);
+                }
+                
+            }
+        })
     }
 }
 
