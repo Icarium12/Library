@@ -1,7 +1,6 @@
 const myLibrary = [];
 const libraryContainer = document.querySelector(".libraryContainer");
 const body = document.body;
-const bookArchive = [];
 
 
 function Book(title, author, numOfPages, readStatus) {
@@ -30,6 +29,7 @@ function addBookToLibrary(book) {
 }
 
 function displayBook(array, libraryContainer) {
+    libraryContainer.replaceChildren();
     for(let i = 0; i < array.length; i++) {
         const bookCard = document.createElement('div');
         bookCard.className = 'bookcard';
@@ -99,14 +99,12 @@ addNewBook.addEventListener('click', () => {
             bookPage.value,
             bookStatus.value
         );
-        bookArchive.push(newBook);
-        console.log(bookArchive);
 
-        myLibrary.length = 0;
         addBookToLibrary(newBook);
         displayBook(myLibrary, libraryContainer);
         form.reset();
         dialog.close();
+        console.log(myLibrary);
     }
     else {
         alert("Please fill out all required fields");
