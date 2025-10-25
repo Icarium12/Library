@@ -18,8 +18,17 @@ function Book(title, author, numOfPages, readStatus) {
     }
 }
 
-const book1 = new Book("The way of kings", "Brandon Sanderson", 1000, "read");
-const book2 = new Book("Regressor's tale of cultivation", "Korean Writer", 10000, "read");
+Book.prototype.toggleStatus = function () {
+    if (this.readStatus === "Read") {
+        this.readStatus = "Not Read";
+    }
+    else if (this.readStatus === "Not Read"){
+        this.readStatus = "Read";
+    }
+}
+
+const book1 = new Book("The way of kings", "Brandon Sanderson", 1000, "Read");
+const book2 = new Book("Regressor's tale of cultivation", "Korean Writer", 10000, "Not Read");
 
 addBookToLibrary(book1);
 addBookToLibrary(book2); 
@@ -56,9 +65,12 @@ function displayBook(array, libraryContainer) {
         status.textContent = `Status: ${array[i].readStatus}`;
         bookCard.appendChild(status);
 
+        const cardButtons = document.createElement('div');
+        cardButtons.className = 'buttonContainer'
+
         const deleteButton = document.createElement('button');
         deleteButton.textContent = "Delete";
-        bookCard.appendChild(deleteButton);
+        cardButtons.appendChild(deleteButton);
 
         bookCard.dataset.id = array[i].id;
 
@@ -70,6 +82,16 @@ function displayBook(array, libraryContainer) {
                 }
                 
             }
+        })
+
+        const changeStatus = document.createElement('button');
+        changeStatus.textContent = "Change read status";
+        cardButtons.appendChild(changeStatus);
+        bookCard.appendChild(cardButtons);
+
+        changeStatus.addEventListener('click', () => {
+            array[i].toggleStatus();
+            status.textContent = `Status: ${array[i].readStatus}`;
         })
     }
 }
