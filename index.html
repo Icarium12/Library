@@ -7,25 +7,26 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+    <h1>Your Personal Library</h1>
     <div class="libraryContainer">
     </div>
 
     <div>
         <button class="add">Add new book</button>
         <dialog closedby="any">
-            <p>Add your new book by filling the form below</p>
+            <p>Add your new book by filling the form below <br> (*) required fields</p>
             <form action="blank">
-                <label for="title">Book Title:*</label>
+                <label for="title">Book Title*:</label>
                 <input type="text" name="title" id="title" required>
 
-                <label for="author">Book Author:*</label>
+                <label for="author">Book Author*:</label>
                 <input type="text" name="author" id="author" required>
 
                 <label for="page">Book pages:</label>
-                <input type="number" name="page" id="page" required>
+                <input type="number" name="page" id="page">
 
-                <label for="status">Read Status:*</label>
-                <select name="status" id="status" required>
+                <label for="status">Read Status:</label>
+                <select name="status" id="status">
                     <option value="Read">Read</option>
                     <option value="Not Read">Not Read</option>
                 </select>

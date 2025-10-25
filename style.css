@@ -3,33 +3,130 @@ body {
     justify-content: center;
     align-items: center;
     flex-direction: column;
+    font-family: Arial, Helvetica, sans-serif;
 }
 
 .libraryContainer {
-    border: 1px solid black;
-    /* height: 30rem; */
-    width: 65rem;
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1fr 1fr 1fr;
     justify-items: center;
+    padding: 1rem;
+    gap: 1rem;
 }
 
 .bookcard {
+    background-color: lightblue;
     margin-top: 1rem;
     margin-bottom: 1rem;
     display: flex;
     flex-direction: column;
     align-items: center;
-    /* text-align: center; */
-    border: 1px solid black;
-    height: 15rem;
-    width: 15rem;
-    
+    width: 17rem;
+    border-radius: 15px;
 }
 
 .book {
+    background-color: whitesmoke;
     margin-top: 1rem;
     border: 1px solid black;
-    height: 13rem;
+    height: 14rem;
     width: 13rem;
+    display: grid;
+    grid-template-rows: 2fr 2fr 1fr;
+    justify-items: center;
+    border-radius: 10px;
+    box-shadow: -5px 0 0px rgba(0, 0, 0, 0.9),
+    5px 5px 10px rgba(0, 0, 0, 0.5);
+    font-weight: 700;
+}
+
+.book > :first-child {
+    font-size: larger;
+    text-align: center;
+}
+
+.buttonContainer {
+    width: 14rem;
+    display: flex;
+    justify-content: space-between;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+}
+
+input {
+    border-radius: 8px;
+    border: none;
+    background-color: rgb(221, 217, 217);
+}
+
+input:focus {
+    border: 2px solid blue;
+    outline: none;
+}
+
+input:invalid:focus {
+    border: 2px solid red;
+}
+
+dialog {
+    border-radius: 10px;
+}
+
+button {
+    margin-top: 1rem;
+}
+
+.delete {
+    margin-bottom: 1rem;
+    width: 5rem;
+    height: 2rem;
+    color: white;
+    background-color: red;
+    border-radius: 10px;
+    border: none;
+    font-weight: 900;
+}
+
+.delete:hover {
+    background-color: darkred;
+}
+
+.status {
+    margin-bottom: 1rem;
+    background-color: blue;
+    color: white;
+    border-radius: 10px;
+    font-weight: 900;
+    border: none;
+}
+
+.status:hover {
+    background-color: darkblue;
+}
+
+.add {
+    width: 10rem;
+    height: 3rem;
+    border-radius: 15px;
+    font-weight: 900;
+    font-size: large;
+    color: white;
+    background-color: green;
+    border: none;
+}
+
+.add:hover {
+    background-color: darkgreen;
+}
+
+.bookStatus {
+    text-align: center;
+    padding: 1px;
+    width: 5rem;
+    margin-top: 1rem;
+    background-color: azure;
+    border-radius: 10px;
 }
