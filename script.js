@@ -1,6 +1,7 @@
 const myLibrary = [];
 const libraryContainer = document.querySelector(".libraryContainer");
 const body = document.body;
+const bookArchive = [];
 
 
 function Book(title, author, numOfPages, readStatus) {
@@ -75,7 +76,9 @@ function displayBook(array, libraryContainer) {
 
 displayBook(myLibrary, libraryContainer);
 
+
 const addNewBook = document.querySelector('.add');
+
 addNewBook.addEventListener('click', () => {
     const dialog = document.querySelector('dialog');
     dialog.showModal();
@@ -86,7 +89,6 @@ addNewBook.addEventListener('click', () => {
     button.addEventListener('click', (event) => {
     event.preventDefault();
     if (form.checkValidity()) {
-        console.log(form.checkValidity());
         const bookTitle = document.querySelector('#title');
         const bookAuthor = document.querySelector('#author');
         const bookPage = document.querySelector('#page');
@@ -97,6 +99,9 @@ addNewBook.addEventListener('click', () => {
             bookPage.value,
             bookStatus.value
         );
+        bookArchive.push(newBook);
+        console.log(bookArchive);
+
         myLibrary.length = 0;
         addBookToLibrary(newBook);
         displayBook(myLibrary, libraryContainer);
