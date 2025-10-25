@@ -4,11 +4,37 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Library</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <div class="libraryContainer">
     </div>
 
+    <div>
+        <button class="add">Add new book</button>
+        <dialog>
+            <p>Add your new book by filling the form below</p>
+            <form action="blank">
+                <label for="title">Book Title:*</label>
+                <input type="text" name="title" id="title" required>
+
+                <label for="author">Book Author:*</label>
+                <input type="text" name="author" id="author" required>
+
+                <label for="page">Book pages:</label>
+                <input type="number" name="page" id="page" required>
+
+                <label for="status">Read Status:*</label>
+                <select name="status" id="status" required>
+                    <option value="Read">Read</option>
+                    <option value="Not Read">Not Read</option>
+                </select>
+
+                <button class="updatelib">Submit</button>
+            </form>
+
+        </dialog>
+    </div>
     <script src="script.js"></script>
 </body>
 </html>

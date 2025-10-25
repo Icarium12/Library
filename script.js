@@ -1,5 +1,6 @@
 const myLibrary = [];
 const libraryContainer = document.querySelector(".libraryContainer");
+const body = document.body;
 
 
 function Book(title, author, numOfPages, readStatus) {
@@ -18,17 +19,17 @@ function Book(title, author, numOfPages, readStatus) {
 }
 
 const book1 = new Book("The way of kings", "Brandon Sanderson", 1000, "read");
-console.log(book1.title);
+const book2 = new Book("Regressor's tale of cultivation", "Korean Writer", 10000, "read");
 
 addBookToLibrary(book1);
-console.log(myLibrary);
+addBookToLibrary(book2); 
 
 function addBookToLibrary(book) {
     myLibrary.push(book);
 }
 
 function displayBook(array, libraryContainer) {
-    for(let i = 0; i <= array.length; i++) {
+    for(let i = 0; i < array.length; i++) {
         const bookCard = document.createElement('div');
         bookCard.className = 'bookcard';
         libraryContainer.appendChild(bookCard);
@@ -50,17 +51,46 @@ function displayBook(array, libraryContainer) {
 
         bookCard.appendChild(book);
 
-        const id = document.createElement('div');
-        id.textContent = array[i].id;
-        bookCard.appendChild(id);
-
         const status = document.createElement('div');
-        status.textContent = array[i].readStatus;
+        status.textContent = `Status: ${array[i].readStatus}`;
         bookCard.appendChild(status);
     }
 }
 
 displayBook(myLibrary, libraryContainer);
 
+const addNewBook = document.querySelector('.add');
+addNewBook.addEventListener('click', () => {
+    const dialog = document.querySelector('dialog');
+    dialog.showModal();
+
+    const form = document.querySelector('form');
+
+    const button = document.querySelector(".updatelib");
+    button.addEventListener('click', (event) => {
+    event.preventDefault();
+    if (form.checkValidity()) {
+        console.log(form.checkValidity());
+        const bookTitle = document.querySelector('#title');
+        const bookAuthor = document.querySelector('#page');
+        const bookPage = document.querySelector('#page');
+        const bookStatus = document.querySelector('#status');
+        const newBook = new Book(
+            bookTitle.value,
+            bookAuthor.value,
+            bookPage.value,
+            bookStatus.value
+        );
+        myLibrary.length = 0;
+        addBookToLibrary(newBook);
+        displayBook(myLibrary, libraryContainer);
+        dialog.close();
+    }
+    else {
+        alert("Please fill out all required fields");
+    }
+})
+
+});
 
 
