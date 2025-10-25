@@ -72,7 +72,7 @@ addNewBook.addEventListener('click', () => {
     if (form.checkValidity()) {
         console.log(form.checkValidity());
         const bookTitle = document.querySelector('#title');
-        const bookAuthor = document.querySelector('#page');
+        const bookAuthor = document.querySelector('#author');
         const bookPage = document.querySelector('#page');
         const bookStatus = document.querySelector('#status');
         const newBook = new Book(
@@ -84,6 +84,7 @@ addNewBook.addEventListener('click', () => {
         myLibrary.length = 0;
         addBookToLibrary(newBook);
         displayBook(myLibrary, libraryContainer);
+        form.reset();
         dialog.close();
     }
     else {
