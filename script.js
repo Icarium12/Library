@@ -37,13 +37,10 @@ function addBookToLibrary(book) {
     myLibrary.push(book);
 }
 
-// function displayBook2(libraryContainer) {
-//     myLibrary.forEach()
-// }
 
-function displayBook(array, libraryContainer) {
+function displayBook(libraryContainer) {
     libraryContainer.replaceChildren();
-    for(let i = 0; i < array.length; i++) {
+    for(let i = 0; i < myLibrary.length; i++) {
         const bookCard = document.createElement('div');
         bookCard.className = 'bookcard';
         libraryContainer.appendChild(bookCard);
@@ -52,21 +49,21 @@ function displayBook(array, libraryContainer) {
         book.className = 'book';
 
         const title = document.createElement('div');
-        title.textContent = array[i].title;
+        title.textContent = myLibrary[i].title;
         book.appendChild(title);
 
         const author = document.createElement('div');
-        author.textContent = `By ${array[i].author}`
+        author.textContent = `By ${myLibrary[i].author}`
         book.appendChild(author);
 
         const pages = document.createElement('div');
-        pages.textContent = `Pages: ${array[i].numOfPages}`;
+        pages.textContent = `Pages: ${myLibrary[i].numOfPages}`;
         book.appendChild(pages);
 
         bookCard.appendChild(book);
 
         const status = document.createElement('div');
-        status.textContent = `${array[i].readStatus}`;
+        status.textContent = `${myLibrary[i].readStatus}`;
         status.className = 'bookStatus';
         bookCard.appendChild(status);
 
@@ -78,29 +75,19 @@ function displayBook(array, libraryContainer) {
         deleteButton.className = "delete";
         cardButtons.appendChild(deleteButton);
 
-        bookCard.dataset.id = array[i].id;
+        bookCard.dataset.id = myLibrary[i].id;
 
         deleteButton.addEventListener('click', () => {
-            array.forEach(book => {
+            myLibrary.forEach(book => {
                 if (bookCard.dataset.id === book.id) {
                     const ensure = prompt("Are you sure you want to delete book (Y/N)?")
                      if (ensure === 'y' || ensure === 'Y') {
                         libraryContainer.removeChild(bookCard);
-                        array = array.filter(book => book.id !== bookCard.dataset.id);
-                        console.log(array);
+                        myLibrary = myLibrary.filter(book => book.id !== bookCard.dataset.id);
+                        console.log(myLibrary);
                      }
                 }
             });
-            // if(bookCard.dataset.id === array[i].id) {
-            //     const ensure = prompt("Are you sure you want to delete book (Y/N)?")
-            //     if (ensure === 'y' || ensure === 'Y') {
-            //         libraryContainer.removeChild(bookCard);
-            //         // array.splice(i);
-            //         array = array.filter(book => book.id !== bookCard.dataset.id);
-            //         console.log(array);
-            //     }
-                
-            // }
         })
 
         const changeStatus = document.createElement('button');
@@ -110,14 +97,14 @@ function displayBook(array, libraryContainer) {
         bookCard.appendChild(cardButtons);
 
         changeStatus.addEventListener('click', () => {
-            array[i].toggleStatus();
-            status.textContent = `${array[i].readStatus}`;
+            myLibrary[i].toggleStatus();
+            status.textContent = `${myLibrary[i].readStatus}`;
         })
     }
-    console.log(array);
+    console.log(myLibrary);
 }
 
-displayBook(myLibrary, libraryContainer);
+displayBook(libraryContainer);
 
 
 
@@ -144,7 +131,7 @@ addNewBook.addEventListener('click', () => {
             bookStatus.value
         );
         addBookToLibrary(newBook);
-        displayBook( libraryContainer);
+        displayBook(libraryContainer);
         
         dialog.close();
         form.reset();
