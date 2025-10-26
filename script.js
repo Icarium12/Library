@@ -1,4 +1,4 @@
-const myLibrary = [];
+let myLibrary = [];
 const libraryContainer = document.querySelector(".libraryContainer");
 const body = document.body;
 
@@ -37,6 +37,10 @@ function addBookToLibrary(book) {
     myLibrary.push(book);
 }
 
+// function displayBook2(libraryContainer) {
+//     myLibrary.forEach()
+// }
+
 function displayBook(array, libraryContainer) {
     libraryContainer.replaceChildren();
     for(let i = 0; i < array.length; i++) {
@@ -52,17 +56,18 @@ function displayBook(array, libraryContainer) {
         book.appendChild(title);
 
         const author = document.createElement('div');
-        author.textContent = array[i].author
+        author.textContent = `By ${array[i].author}`
         book.appendChild(author);
 
         const pages = document.createElement('div');
-        pages.textContent = array[i].numOfPages;
+        pages.textContent = `Pages: ${array[i].numOfPages}`;
         book.appendChild(pages);
 
         bookCard.appendChild(book);
 
         const status = document.createElement('div');
-        status.textContent = `Status: ${array[i].readStatus}`;
+        status.textContent = `${array[i].readStatus}`;
+        status.className = 'bookStatus';
         bookCard.appendChild(status);
 
         const cardButtons = document.createElement('div');
@@ -70,33 +75,50 @@ function displayBook(array, libraryContainer) {
 
         const deleteButton = document.createElement('button');
         deleteButton.textContent = "Delete";
+        deleteButton.className = "delete";
         cardButtons.appendChild(deleteButton);
 
         bookCard.dataset.id = array[i].id;
 
         deleteButton.addEventListener('click', () => {
-            if(bookCard.dataset.id === array[i].id) {
-                const ensure = prompt("Are you sure you want to delete book (Y/N)?")
-                if (ensure === 'y' || ensure === 'Y') {
-                    libraryContainer.removeChild(bookCard);
+            array.forEach(book => {
+                if (bookCard.dataset.id === book.id) {
+                    const ensure = prompt("Are you sure you want to delete book (Y/N)?")
+                     if (ensure === 'y' || ensure === 'Y') {
+                        libraryContainer.removeChild(bookCard);
+                        array = array.filter(book => book.id !== bookCard.dataset.id);
+                        console.log(array);
+                     }
                 }
+            });
+            // if(bookCard.dataset.id === array[i].id) {
+            //     const ensure = prompt("Are you sure you want to delete book (Y/N)?")
+            //     if (ensure === 'y' || ensure === 'Y') {
+            //         libraryContainer.removeChild(bookCard);
+            //         // array.splice(i);
+            //         array = array.filter(book => book.id !== bookCard.dataset.id);
+            //         console.log(array);
+            //     }
                 
-            }
+            // }
         })
 
         const changeStatus = document.createElement('button');
         changeStatus.textContent = "Change read status";
+        changeStatus.className = "status";
         cardButtons.appendChild(changeStatus);
         bookCard.appendChild(cardButtons);
 
         changeStatus.addEventListener('click', () => {
             array[i].toggleStatus();
-            status.textContent = `Status: ${array[i].readStatus}`;
+            status.textContent = `${array[i].readStatus}`;
         })
     }
+    console.log(array);
 }
 
 displayBook(myLibrary, libraryContainer);
+
 
 
 const addNewBook = document.querySelector('.add');
@@ -121,16 +143,12 @@ addNewBook.addEventListener('click', () => {
             bookPage.value,
             bookStatus.value
         );
-
         addBookToLibrary(newBook);
-        displayBook(myLibrary, libraryContainer);
-        form.reset();
+        displayBook( libraryContainer);
+        
         dialog.close();
-        console.log(myLibrary);
-    }
-    else {
-        alert("Please fill out all required fields");
-    }
+        form.reset();
+    }  
 })
 
 });
