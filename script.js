@@ -3,6 +3,7 @@ const libraryContainer = document.querySelector(".libraryContainer");
 const body = document.body;
 
 
+
 function Book(title, author, numOfPages, readStatus) {
     if (!new.target) {
         throw Error("You must use the 'new' operator to call the constructor");
@@ -25,13 +26,7 @@ Book.prototype.toggleStatus = function () {
     else if (this.readStatus === "Not Read"){
         this.readStatus = "Read";
     }
-}
-
-const book1 = new Book("The way of kings", "Brandon Sanderson", 1000, "Read");
-const book2 = new Book("Regressor's tale of cultivation", "Korean Writer", 10000, "Not Read");
-
-addBookToLibrary(book1);
-addBookToLibrary(book2); 
+} 
 
 function addBookToLibrary(book) {
     myLibrary.push(book);
@@ -39,6 +34,7 @@ function addBookToLibrary(book) {
 
 
 function displayBook(libraryContainer) {
+    // Displays book inside libray on html
     libraryContainer.replaceChildren();
     for(let i = 0; i < myLibrary.length; i++) {
         const bookCard = document.createElement('div');
@@ -84,7 +80,6 @@ function displayBook(libraryContainer) {
                      if (ensure === 'y' || ensure === 'Y') {
                         libraryContainer.removeChild(bookCard);
                         myLibrary = myLibrary.filter(book => book.id !== bookCard.dataset.id);
-                        console.log(myLibrary);
                      }
                 }
             });
@@ -101,15 +96,9 @@ function displayBook(libraryContainer) {
             status.textContent = `${myLibrary[i].readStatus}`;
         })
     }
-    console.log(myLibrary);
 }
 
-displayBook(libraryContainer);
-
-
-
 const addNewBook = document.querySelector('.add');
-
 addNewBook.addEventListener('click', () => {
     const dialog = document.querySelector('dialog');
     dialog.showModal();
@@ -118,26 +107,25 @@ addNewBook.addEventListener('click', () => {
 
     const button = document.querySelector(".updatelib");
     button.addEventListener('click', (event) => {
-    event.preventDefault();
-    if (form.checkValidity()) {
-        const bookTitle = document.querySelector('#title');
-        const bookAuthor = document.querySelector('#author');
-        const bookPage = document.querySelector('#page');
-        const bookStatus = document.querySelector('#status');
-        const newBook = new Book(
-            bookTitle.value,
-            bookAuthor.value,
-            bookPage.value,
-            bookStatus.value
-        );
-        addBookToLibrary(newBook);
-        displayBook(libraryContainer);
-        
-        dialog.close();
-        form.reset();
-    }  
-})
-
+        event.preventDefault();
+        if (form.checkValidity()) {
+            const bookTitle = document.querySelector('#title');
+            const bookAuthor = document.querySelector('#author');
+            const bookPage = document.querySelector('#page');
+            const bookStatus = document.querySelector('#status');
+            const newBook = new Book(
+                bookTitle.value,
+                bookAuthor.value,
+                bookPage.value,
+                bookStatus.value
+            );
+            addBookToLibrary(newBook);
+            displayBook(libraryContainer);
+            
+            dialog.close();
+            form.reset();
+        }  
+    })
 });
 
 
