@@ -98,21 +98,41 @@ function displayBook(libraryContainer) {
     }
 }
 
+const bookTitle = document.querySelector('#title');
+const bookAuthor = document.querySelector('#author');
+const bookPage = document.querySelector('#page');
+const bookStatus = document.querySelector('#status');
+
+bookTitle.addEventListener("input", () => {
+    isValid(bookTitle);
+})
+
+bookAuthor.addEventListener("input", () => {
+    isValid(bookAuthor);
+} )
+
+function isValid(element) {
+    if(element.value !== '') {
+        element.setCustomValidity("");
+        element.reportValidity();
+    }
+    else {
+        element.setCustomValidity(`Please enter the book's ${element.name}`);
+        element.reportValidity();
+    }
+}
+
+const form = document.querySelector('form');
+
 const addNewBook = document.querySelector('.add');
 addNewBook.addEventListener('click', () => {
     const dialog = document.querySelector('dialog');
     dialog.showModal();
 
-    const form = document.querySelector('form');
-
     const button = document.querySelector(".updatelib");
     button.addEventListener('click', (event) => {
         event.preventDefault();
         if (form.checkValidity()) {
-            const bookTitle = document.querySelector('#title');
-            const bookAuthor = document.querySelector('#author');
-            const bookPage = document.querySelector('#page');
-            const bookStatus = document.querySelector('#status');
             const newBook = new Book(
                 bookTitle.value,
                 bookAuthor.value,
@@ -124,7 +144,11 @@ addNewBook.addEventListener('click', () => {
             
             dialog.close();
             form.reset();
-        }  
+        }
+        else {
+            isValid(bookTitle);
+            isValid(bookAuthor);
+        } 
     })
 });
 
